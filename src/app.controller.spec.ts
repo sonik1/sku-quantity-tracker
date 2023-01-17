@@ -34,5 +34,35 @@ describe('AppController', () => {
       });
       expect(typeof(response)).toBe('object');
     });
+
+    it('check transaction.json, if stock.json does not have the given sku', () => {
+      const appController = app.get(AppController);
+      let query = {
+        "sku":'QWP084011/40/99'
+      }
+      let response = appController.getCurrentStock(query)
+      .then((response) =>{
+        console.log("response", response);
+      }).
+      catch((error) => {
+        console.log("error", error);
+      });
+      expect(typeof(response)).toBe('object');
+    });
+
+    it('should return error when provided sku does not exist', () => {
+      const appController = app.get(AppController);
+      let query = {
+        "sku":'test'
+      }
+      let response = appController.getCurrentStock(query)
+      .then((response) =>{
+        console.log("response", response);
+      }).
+      catch((error) => {
+        console.log("error", error);
+      });
+      expect(typeof(response)).toBe('object');
+    });
   });
 });
